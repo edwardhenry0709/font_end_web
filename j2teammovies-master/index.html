@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Trang Chủ - J2Team Movies</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:title" content="J2Team Movies">
+    <meta property="og:description" content="Assignment JavaScript FPT Polytechnic">
+    <meta property="og:site_name" content="J2Team Movies">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://j2teamlbh.github.io/">
+    <meta property="og:image" content="https://i.imgur.com/ixT1YTO.jpg">
+    <meta property="og:image:alt" content="J2Team Community Logo!">
+    <meta name="og:email" content="j2team.lbh@gmail.com">
+    <meta property="fb:app_id" content="325350918017127">
+    <meta property="fb:admins" content="5515886">
+    <meta property="fb:pages" content="442878785875732">
+    <meta property="twitter:image" content="https://i.imgur.com/ixT1YTO.jpg">
+    <meta name="twitter:site" content="@LeHau_Twit">
+    <meta name="twitter:domain" content="j2teamlbh.me">
+    <meta name="twitter:creator" content="@LeHau_Twit">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="copyright" content="Le Hau">
+    <meta name="author" content="Le Hau">
+    <meta name="keywords" content="j2team, j2team community,le hau ,lê hậu, j2teamlbh,j2team movies">
+    <link rel="shortcut icon" sizes="76x76" type="image/png" href="assets/images/fav.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/images/fav-apple.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/customstyle.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+
+</head>
+
+<body class="home">
+    <div class="wrapper" ng-app="home">
+        <header class="header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-transparent movies-menu">
+                <div class="container">
+                    <a class="navbar-brand" href="index.html"><img class="logo img-fluid"
+                            src="assets/images/logo-j2team.png" alt="Logo"></a>
+                    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                        data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                        aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+                    <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="movies-list.html">Danh sách phim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="movies-request.html">Yêu cầu phim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a name="watch-more" id="watch-more" class="btn btn-primary watch-more"
+                                    href="login.html" role="button">Đăng nhập</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="slideshow" ng-controller="slideShow">
+                <div class="slidess">
+                    <div class="slide" ng-repeat="item in slideItems"
+                        ng-style="{'background-image': 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({{item.image}})'}">
+                        <div class="container m-info">
+                            <h2 class="title">{{item.name}}</h2>
+                            <div class="movies-info">
+                                <span class="year">{{item.year}}</span>
+                                <span>{{item.kind}}</span>
+                                <a name="btn-watchnow" id="btn-watchnow" class="btn btn-primary btn-watchnow my-3"
+                                    href="#" role="button">Xem Phim</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fader_controls">
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+                <div class="thumbnail-slide">
+                    <div class="m-item" ng-click="slidecur($index+1)" ng-repeat="item in slideItems">
+                        <img ng-src="{{item.imagethumb}}" class="img-fluid" alt={{item.name}}>
+                        <div class="overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Button trigger modal -->
+        <section class="main-content py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7 col-xl-9 col-lg-8 my-4" ng-controller="moviesBox">
+                        <div class="movie-category">
+                            <h3 class="title d-inline-block">Thịnh hành</h3>
+                            <a href="movies-list.html" class="watch-list">Xem thêm</a>
+                        </div>
+                        <div class="movies__list">
+                            <div class="movie-it" ng-repeat="item in cards">
+                                <div href="#" class="card" style="background-color: #050A1A">
+                                    <div class="movies-img">
+                                        <img ng-src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{item.poster_path}}"
+                                            class="card-img-top" alt="Image">
+                                    </div>
+                                    <div class="movies-inner" data-toggle="modal" data-target="#_{{item.id}}">
+                                        <span> Chi tiết </span>
+                                    </div>
+                                    <div class="title-in">
+                                        <h6><a
+                                                href="#">{{item.title | limitTo: 15}}{{item.title.length > 15 ? '...' : ''}}</a>
+                                        </h6>
+                                        <p><i class="fas fa-star movie-star"></i><span> {{item.vote_average}}</span> /10
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade bd-example-modal-lg" id="_{{item.id}}" tabindex="-1"
+                                    role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">{{item.title}} ({{item.original_title}})</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="movies-img-thumb">
+                                                                <img ng-src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{item.poster_path}}"
+                                                                    class="card-img-top" alt="Image">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <h4>Mô Tả:</h4>
+                                                            <span>{{item.overview | limitTo: 250}}{{item.overview.length > 250 ? '...' : ''}}</span>
+                                                            <span ng-if="!item.overview">Chưa có mô tả</span>
+                                                            <h4><i class="fas fa-clock"></i> Ngày phát hành:</h4>
+                                                            {{item.release_date}}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer justify-content-between">
+                                                <span><i class="fas fa-star"></i> Đánh giá: {{item.vote_average}} /
+                                                    10</span>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-xl-3 my-4">
+                        <div class="weather-clock">
+                            <h3>Thời tiết</h3>
+                            <div class="weather-card" ng-controller="weatherWidget" id="widget">
+                                <h2>{{main.temp}}º</h2>
+                                <p>{{city}}</p>
+                                <div class="weather-icon sun"></div>
+                            </div>
+                        </div>
+                        <h3>Phim sắp phát hành</h3>
+                        <div class="movies-upcomming mt-4" ng-controller="Upcomming">
+                            <div class="card mb-2 bg-transparent border-0" style="max-width: 540px;"
+                                ng-repeat="item in cards">
+                                <div class="row no-gutters">
+                                    <div class="col-md-3">
+                                        <img ng-src="https://image.tmdb.org/t/p/w600_and_h900_bestv2{{item.poster_path}}"
+                                            class="card-img" alt="...">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{item.title}}</h5>
+                                            <p class="card-text"><small class="text-muted"><i class="fas fa-star"></i>
+                                                    {{item.vote_average}} / 10</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Copyright ©2020 Conroy Dang. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/angular.min.js"></script>
+    <script src="assets/js/all.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/controller.js"></script>
+    <script src="assets/js/contentScript.js"></script>
+
+</body>
+
+</html>
